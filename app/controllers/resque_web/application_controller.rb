@@ -2,7 +2,7 @@ module ResqueWeb
   class ApplicationController < ActionController::Base
     protect_from_forgery
     before_filter :set_subtabs
-    http_basic_authenticate_with name: 'us3r', password: 'us3rp4ss'
+    http_basic_authenticate_with name: 'us3r', password: 'developermarketingtotallyrocks!'
 
     helper :all
 
