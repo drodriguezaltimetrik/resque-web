@@ -2,7 +2,10 @@ module ResqueWeb
   class ApplicationController < ActionController::Base
     protect_from_forgery
     before_filter :set_subtabs
-    http_basic_authenticate_with name: 'us3r', password: 'developermarketingtotallyrocks!'
+
+    if ENV['DFC_USER']
+      http_basic_authenticate_with name: ENV['DFC_USER'], password: ENV['DFC_PASSWORD']
+    end
 
     helper :all
 

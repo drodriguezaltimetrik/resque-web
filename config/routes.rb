@@ -26,9 +26,10 @@ ResqueWeb::Engine.routes.draw do
   end
 
   get '/stats' => "stats#index"
-  get '/stats/:action',     :controller => :stats
-  get '/stats/:action/:id', :controller => :stats, :constraints => {:id => id_pattern}, :as => :statistic
 
+  %w(index resque redis keys).each do |action|
+    get "/stats/#{action}",     :controller => :stats, :action => action
+  end
+  get '/stats/keys/:id', :controller => :stats, :constraints => {:id => id_pattern}, :action => :keys, :as => :statistic
   root :to => 'overview#show'
-
 end
