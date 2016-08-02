@@ -11,7 +11,7 @@ ResqueWeb::Engine.routes.draw do
   resources :working,   :only => [:index]
   resources :queues,    :only => [:index,:show,:destroy], :constraints => {:id => id_pattern} do
     member do
-      put 'clear' 
+      put 'clear'
     end
   end
   resources :workers,   :only => [:index,:show], :constraints => {:id => id_pattern}
@@ -25,11 +25,12 @@ ResqueWeb::Engine.routes.draw do
     end
   end
 
-  get '/stats' => "stats#index"
+  get '/stats' => 'stats#index'
+  get '/stats/resque' => 'stats#resque'
+  get '/stats/redis' => 'stats#redis'
+  get '/stats/keys' => 'stats#keys'
+  get '/stats/keys/:id' => 'stats#keys', :constraints => { :id => id_pattern }, as: :keys_statistic
 
-  %w(index resque redis keys).each do |action|
-    get "/stats/#{action}",     :controller => :stats, :action => action
-  end
-  get '/stats/keys/:id', :controller => :stats, :constraints => {:id => id_pattern}, :action => :keys, :as => :statistic
+
   root :to => 'overview#show'
 end
