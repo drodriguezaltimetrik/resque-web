@@ -14,11 +14,7 @@ module ControllerTestHelpers
       ) unless options[:auth] == false
     end
 
-    if Rails.version >= '5.0.0'
-      send(method, action, params: params)
-    else
-      send(method, action, params)
-    end
+    send(method, action, params: params)
 
     ENV["RESQUE_WEB_HTTP_BASIC_AUTH_USER"] = user
     ENV["RESQUE_WEB_HTTP_BASIC_AUTH_PASSWORD"] = password
