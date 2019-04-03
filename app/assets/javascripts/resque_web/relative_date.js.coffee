@@ -3,7 +3,7 @@ jQuery ->
     dt = $(this).text()
     $(this).relativeDate()
     relatized = $(this).text()
-    if $(this).parents("a").size() > 0 || $(this).is("a")
+    if $(this).parents("a").length > 0 || $(this).is("a")
       $(this).relativeDate()
       $(this).attr("title", dt) unless $(this).attr("title")
     else
